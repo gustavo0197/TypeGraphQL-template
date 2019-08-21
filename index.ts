@@ -1,5 +1,15 @@
 import "reflect-metadata"
-import { PORT } from './config'
+import { PORT, MONGO_URI, MONGO_CONFIG } from './config'
 import { Server } from './server'
+import { Mongoose } from './models'
 
-const server: Server = new Server(PORT)
+console.log("\x1Bc")
+
+async function runServer(){
+    await Promise.all([
+        new Server(PORT),
+        new Mongoose(MONGO_URI, MONGO_CONFIG)
+    ])
+}
+
+runServer()

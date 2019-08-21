@@ -2,7 +2,7 @@ import { buildSchema } from 'type-graphql'
 import { ApolloServer, ApolloError } from 'apollo-server-koa'
 import Koa from 'koa'
 import { HelloResolver } from './resolvers/Hello.resolver';
-import { decodeToken } from './middlewares/auth';
+import { decodeToken } from './helpers/auth';
 
 export class Server {
     private koa: Koa = new Koa() // Koa server
@@ -41,8 +41,13 @@ export class Server {
     }
     
     private async runServer(){
-        let subscriptionsServer = await this.koa.listen(this.PORT)
-        this.graphQLServer.applyMiddleware({app: this.koa})
-        this.graphQLServer.installSubscriptionHandlers(subscriptionsServer)
+        try {
+            let subscriptionsServer = await this.koa.listen(this.PORT)
+            this.graphQLServer.applyMiddleware({app: this.koa})
+            this.graphQLServer.installSubscriptionHandlers(subscriptionsServer)
+            console.log(`Listening on http://localhost:${this.PORT}`)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
