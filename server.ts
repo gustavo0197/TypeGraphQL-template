@@ -14,7 +14,7 @@ export class Server {
     private async setUpServer(){
         this.graphQLServer = new ApolloServer({
             schema: await buildSchema({ // Build types and resolvers
-                resolvers: [__dirname + "/resolvers/*resolver.*s"] // import all resolvers
+                resolvers: [__dirname + "/resolvers/*.resolver.*s"] // import all resolvers
             }),
             subscriptions: {
                 onConnect: (params: any, webSocket) => {
