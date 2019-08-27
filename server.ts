@@ -1,8 +1,7 @@
 import { buildSchema } from 'type-graphql'
 import { ApolloServer, ApolloError } from 'apollo-server-koa'
 import Koa from 'koa'
-import { HelloResolver } from './resolvers/Hello.resolver';
-import { decodeToken } from './helpers/auth';
+import { decodeToken } from './helpers/auth'; // token decoder
 
 export class Server {
     private koa: Koa = new Koa() // Koa server
@@ -15,7 +14,7 @@ export class Server {
     private async setUpServer(){
         this.graphQLServer = new ApolloServer({
             schema: await buildSchema({ // Build types and resolvers
-                resolvers: [HelloResolver]
+                resolvers: [__dirname + "/resolvers/*resolver.*s"] // import all resolvers
             }),
             subscriptions: {
                 onConnect: (params: any, webSocket) => {
@@ -31,7 +30,7 @@ export class Server {
                 if(connection){
                     return connection.context
                 }
-                else { // On every connection returns the verified token
+                else { // On every connection returns the decoded token and send it to the resolvers
                     return { auth: decodeToken(ctx.request.header.token) }
                 }
             }
