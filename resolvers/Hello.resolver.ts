@@ -3,7 +3,7 @@ import { Hello } from '../types/Hello.type';
 
 @Resolver(Hello)
 export class HelloResolver {
-    @Query(returns => Hello)
+    @Query(returns => Hello, {name: "Hello"})
     hello(){
         return {
             message: "Hello world :D",

@@ -2,6 +2,8 @@ import { buildSchema } from 'type-graphql'
 import { ApolloServer, ApolloError } from 'apollo-server-koa'
 import Koa from 'koa'
 import { decodeToken } from './helpers/auth'; // token decoder
+import { Container } from 'typedi'
+import { isAuth } from './middlewares/authentication';
 
 export class Server {
     private koa: Koa = new Koa() // Koa server
@@ -14,7 +16,9 @@ export class Server {
     private async setUpServer(){
         this.graphQLServer = new ApolloServer({
             schema: await buildSchema({ // Build types and resolvers
-                resolvers: [__dirname + "/resolvers/*.resolver.*s"] // import all resolvers
+                resolvers: [__dirname + "/resolvers/*.resolver.*s"], // import all resolvers
+                authChecker: isAuth, // Authentication middleware
+                container: Container // Dependency injection
             }),
             subscriptions: {
                 onConnect: (params: any, webSocket) => {
