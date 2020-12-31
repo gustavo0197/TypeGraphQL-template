@@ -13,7 +13,7 @@
     "test": "mocha test/*.test.js"
   },
   "dependencies": {
-    "apollo-server-koa": "^2.8.1",
+    "apollo-server-koa": "^2.14.2",
     "bcrypt": "^5.0.0",
     "graphql": "^14.4.2",
     "jsonwebtoken": "^8.5.1",
