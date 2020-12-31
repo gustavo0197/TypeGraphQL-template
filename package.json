@@ -20,7 +20,7 @@
     "koa": "^2.7.0",
     "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.5",
+    "type-graphql": "^0.17.6",
     "typedi": "^0.8.0",
     "typegoose": "^5.9.0",
     "typescript": "^3.5.3"
