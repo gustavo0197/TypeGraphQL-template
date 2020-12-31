@@ -18,7 +18,7 @@
     "graphql": "^14.4.2",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.7.0",
-    "mongoose": "^5.6.9",
+    "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.5",
     "typedi": "^0.8.0",
